@@ -14,8 +14,8 @@ def google_api(query, date_range, start, save_json=True):
     if isfile(filename):
         res = json.load(open(filename,'r'))
     else:
-        DevKey = 'AIzaSyAN_EuwtH0ORNVrUQE2NYcaBJSLVomrZQc' 
-        cxkey = '008838510968646805464:e2528gaize0'
+        DevKey = None  # pls provide your api-key
+        cxkey = None
         service = build("customsearch", "v1",developerKey=DevKey) 
         res = service.cse().list(q = query, 
                                          cx = cxkey,  
