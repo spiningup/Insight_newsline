@@ -14,8 +14,8 @@ def google_api(query, date_range, start, save_json=True):
     if isfile(filename):
         res = json.load(open(filename,'r'))
     else:
-        DevKey = None  # pls provide your api-key
-        cxkey = None
+        DevKey = (open('google-apikey.txt','r')).read().replace('\n','')
+        cxkey = '008838510968646805464:e2528gaize0'
         service = build("customsearch", "v1",developerKey=DevKey) 
         res = service.cse().list(q = query, 
                                          cx = cxkey,  
@@ -100,7 +100,7 @@ def saveto_mysql(con, searchkey, engine="google"):
             cur.execute("SELECT title FROM dataGoogle WHERE searchkey = '%(searchkey)s'" % vars())
             existing_titles = [title[0] for title in cur.fetchall()]
 
-            for year in range(2013, 2008, -1):
+            for year in range(2013, 2006, -1):
                 for istart in range(1, 100, 10):
                     date_range1 = 'date:r:%s0101:%s0630' %(year, year)
                     if year != 2013:
@@ -119,9 +119,12 @@ def saveto_mysql(con, searchkey, engine="google"):
                             if find:
                                 title, snippet, url, imgurl, text = getnews(item)
                                 if title not in existing_titles:
-                                    cur.execute("INSERT INTO dataGoogle(year, istart, searchkey, title, snippet, url, \
+                                    try:
+                                        cur.execute("INSERT INTO dataGoogle(year, istart, searchkey, title, snippet, url, \
                                          imgurl, content) values (%s, %s, %s, %s, %s, %s, %s, %s)", \
                                             (year, istart, searchkey, title, snippet, url, imgurl, text))
+                                    except:
+                                        pass
                 print "Finishing getting 200 news from %s" %(year)
             
             con.commit()

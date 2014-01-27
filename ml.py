@@ -49,7 +49,7 @@ def vectorization(dataset, method="tfidf", n_features=2000):
         import scipy.sparse as sp
     
         # nfeatures are the number of distinct words, except stop_words, in the dataset
-        vectorizer = TfidfVectorizer(max_df=0.5, stop_words='english', ngram_range=(1, 1))
+        vectorizer = TfidfVectorizer(max_df=0.8, stop_words='english', ngram_range=(1, 2))
         X_train = vectorizer.fit_transform(dataset) # X-dim(ndataset, nfeatures)
         assert sp.issparse(X_train)
 
@@ -83,7 +83,7 @@ def ml_kmeans(X, n_clusters=50):
     clusters_idx = {}
     for i in range(n_clusters):
         clusters_idx[i] = np.where(km.labels_ == i)
-        print i, len(clusters_idx[i][0])
+#        print i, len(clusters_idx[i][0])
 
     for ilabel, label in enumerate(uniquelabels): # ncluster
         for id, i in enumerate(km.labels_): # ndataset
@@ -114,13 +114,13 @@ def ml_meanshift(X):
         print i, len(np.where(labels == i))
     return
 
-def topic_extraction(dataset, n_features = 2000, n_topics = 10, n_top_words=2):
+def topic_extraction(dataset, n_features = 300, n_topics = 10, n_top_words=2):
     # http://scikit-learn.org/stable/auto_examples/applications/topics_extraction_with_nmf.html#example-applications-topics-extraction-with-nmf-py
     from sklearn.feature_extraction import text
     from sklearn import decomposition
     n_samples = len(dataset)
 
-    vectorizer = text.CountVectorizer(max_df=0.5, max_features=n_features, stop_words='english')
+    vectorizer = text.CountVectorizer(max_df=0.85, max_features=n_features, stop_words='english')
     counts = vectorizer.fit_transform(dataset[:n_samples])
     tfidf = text.TfidfTransformer().fit_transform(counts)
 
