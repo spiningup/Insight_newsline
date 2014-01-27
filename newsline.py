@@ -5,8 +5,6 @@ from get_data import *
 import MySQLdb
 
 app = Flask(__name__)
-#db = MySQLdb.connect('localhost', 'jun', 'insight', 'dataGoodb')
-#db = MySQLdb.connect(user="root", host="localhost", port=3306, db="dataGoodb")
 default_engine = "nytimes"
 
 def initialize_data():
