@@ -26,7 +26,7 @@ body {
 body .splash {
     padding-top: 100px;
     font-weight:200; 
-    font-size:128px; 
+    font-size:8.5vw; 
     color:#1f8dd6; 
     margin-bottom:0;
     font-family: Courier;
@@ -42,7 +42,7 @@ body .splash-small {
 
 body .caption {
     font-weight:200; 
-    font-size:2.8em; 
+    font-size:3.2vw; 
     color:#666; 
     margin:5px;
     margin-bottom:30px;
