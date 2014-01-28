@@ -38,7 +38,10 @@ def nytimes_api(queue, save_json=True):
             continue
         else:
             url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=%(queue)s&page=%(page)d&api-key=%(apikey)s" % vars()
-            articles = json.loads(urlopen(url).read())
+            try:
+                articles = json.loads(urlopen(url).read())
+            except:
+                continue
             if save_json:
                 with open(filename, 'w') as outfile:
                     json.dump(articles, outfile, sort_keys = True, indent = 2)
