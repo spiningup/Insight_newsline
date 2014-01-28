@@ -1,7 +1,7 @@
 import numpy as np
 
 def clean_titles(titles, searchkeys, light=True):
-    import nltk
+#    import nltk
 #    stemmer = nltk.stem.lancaster.LancasterStemmer()
 #    stemmer = nltk.stem.snowball.EnglishStemmer(ignore_stopwords=True)
 

@@ -12,7 +12,7 @@ def get_dataset(option='google', searchkey='apple+China'):
 # AND newstype = 'News'
         }
 
-    con = mdb.connect('localhost', 'jun', 'insight', 'dataGoodb')
+    con = mdb.connect('localhost', 'root', '', 'datagoodb')
     cur = con.cursor()
     cur.execute(curstring[option])
     dataset = cur.fetchall()
