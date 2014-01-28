@@ -21,7 +21,6 @@ def saveto_mysql(con, searchkey, engine="google"):
 
     if engine == 'google':
         allurls = json.load(open('googlenews_url.json','r'))
-        
         with con:
             cur = con.cursor()
         #    cur.execute("DROP TABLE IF EXISTS dataGoogle");
@@ -70,8 +69,14 @@ def saveto_mysql(con, searchkey, engine="google"):
             print "finished retriving %d articles from Nytimes" %(n_articles)
             for page in range(maxpage):
                     filename = 'data-nytimes/articles_%(searchkey)s_%(page)s.json' % vars()
-                    data = json.load(open(filename,'r'))
-                    items = data['response']['docs']
+                    try:
+                        data = json.load(open(filename,'r'))
+		    except:
+		        continue
+		    try:
+                        items = data['response']['docs']
+		    except:
+			continue
                     for item in items:
                         try:
                             pubdate = item['pub_date'].encode('utf-8')
@@ -97,10 +102,12 @@ def saveto_mysql(con, searchkey, engine="google"):
                         except:
                             imgurl = None
     
-    
-                        cur.execute("INSERT INTO dataNytimes(pubdate, searchkey, newstype, title, snippet, url, \
+                        try:
+                       	    cur.execute("INSERT INTO dataNytimes(pubdate, searchkey, newstype, title, snippet, url, \
                                      imgurl) values (%s, %s, %s, %s, %s, %s, %s)", \
                                         (pubdate, searchkey, newstype, title, snippet, url, imgurl))
+                        except:
+                            pass
             
             con.commit()
                         

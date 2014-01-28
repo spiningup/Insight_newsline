@@ -28,9 +28,9 @@ def google_api(query, date_range, start, save_json=True):
 def nytimes_api(queue, save_json=True):
     apikey = "352BFF2F987829A9EB0652FE6AA12946:7:68679319"
     sections = ['all-sections']
+    n_articles = 0
 
     for page in range(99):
-
         if page % 10 == 0:
             print "%d number of articles retrived"%(page*10)
         filename = 'data-nytimes/articles_%(queue)s_%(page)s.json' % vars()
@@ -47,11 +47,12 @@ def nytimes_api(queue, save_json=True):
             if page * 10 > n_articles:
                 break
 #        time.sleep(0.1)
+    if n_articles == 0:
+        n_articles = 999
     return n_articles
 
 def getnews(item, getcontent=False):
     
-    from boilerpipe.extract import Extractor
     title = item['title']
     snippet = item['snippet']
     url = item['link']
@@ -62,6 +63,7 @@ def getnews(item, getcontent=False):
         imgurl = None
     text = None
     if getcontent:
+        from boilerpipe.extract import Extractor
         try:
             extractor = Extractor(extractor='ArticleExtractor', url=url)
             text = extractor.getText().encode('utf-8')
