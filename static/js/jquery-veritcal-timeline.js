@@ -77,12 +77,12 @@
           <div class="inner"> \
             <div class="inner2"> \
               <div class="timestamp">{{timestamp}}</div> \
-              <div class="group">{{groupDisplay}}</div> \
+              <div id="{{id}}" class="group">{{groupDisplay}}</div> \
             </div> \
           </div> \
         </div> \
       ',
-      buttonTemplate: '<div></div>', 
+      buttonTemplate: '', 
       //        <div class="vertical-timeline-buttons"> \
       //          <div class="expand-collapse-buttons">			\
       //            <a class="expand-all active" href="#"><span>Expand all</span></a> \
