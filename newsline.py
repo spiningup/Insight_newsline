@@ -5,7 +5,7 @@ from get_data import *
 import MySQLdb
 
 app = Flask(__name__)
-default_engine = "nytimes"
+default_engine = "google"
 
 def initialize_data():
     # get jobQuery and start
