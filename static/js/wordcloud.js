@@ -4,7 +4,7 @@ function draw_wordcloud(width, height) {
 	  .words(["Alibaba", "Syria", "Obamacare", "gun control", "Facebook IPO", "Obama", "bitcoin", "government shutdown", "twitter", "data science", "apple China", "football concussions", "global warming", "smartphone", "climate conference", "financial crisis", "sochi winter", "snowden"].map(function(d) {
       return {text: d, size: 10 + Math.random() * 90};
       }))
-      .padding(5)
+      .padding(-30)
       .rotate(0) // function() { return ~~(Math.random() * 2) * 90; })
       .font("Impact")
       .fontSize(function(d) { return d.size; })
