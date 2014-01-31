@@ -58,23 +58,26 @@ function drawChart(results) {
 }
 
 function cback(results) {
-    window.history.pushState("", "Newsline", "/search?q="+results['query']);
 
-    //    $("chartlayer").remove();
-    //    $("textlayer").remove();
-    $("#spinner").html('');
-    $("#summarybut").css("background", "#fff");
-    $("#summarybut").css("color", "#666");
-    $("#summarybut").css("border", "1px solid #ddd");
-    $("#timelinebut").css("background", "#02a6eb");
-    $("#timelinebut").css("color", "#fff");
-    $("#timelinebut").css("border", "0px");
+    if (jQuery.isEmptyObject(results)) {
+	window.open('/errorpage', '_self'); 
+    }
+    else {
+	window.history.pushState("", "Newsline", "/search?q="+results['query']);
+	$("#summarybut").css("background", "#fff");
+	$("#summarybut").css("color", "#666");
+	$("#summarybut").css("border", "1px solid #ddd");
+	$("#timelinebut").css("background", "#02a6eb");
+	$("#timelinebut").css("color", "#fff");
+	$("#timelinebut").css("border", "0px");
 
-    $('.timeline-jquery').verticalTimeline({
-       data: results['items'],
-       width: '100%',
-      });
+	$('.timeline-jquery').verticalTimeline({
+		data: results['items'],
+		    width: '100%',
+		    });
+	$("#spinner").html('');
 
+    }
 }
 
 
