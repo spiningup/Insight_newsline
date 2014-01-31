@@ -46,6 +46,10 @@ def initialize_data():
 def hello():
     return render_template('index.html') 
 
+@app.route("/errorpage")
+def errorpage():
+    return render_template('errorpage.html') 
+
 @app.route('/search')
 def search():
     query = request.args.get('q', '')
@@ -60,7 +64,11 @@ def searchTo(query):
 @app.route('/analyze', methods=['POST'] )
 def runAnalyze():
     
-    searchkey, years, titles, urls, imgurls, ctitles, displaytitles, title_idx, n_clusters = initialize_data()
+    try:
+        searchkey, years, titles, urls, imgurls, ctitles, displaytitles, title_idx, n_clusters = initialize_data()
+    except:
+        dictResults = {}
+        return jsonify(dictResults)
 
     dictResults = {}
     dictResults['query'] = searchkey
@@ -142,6 +150,7 @@ def runGettopics():
     return jsonify(dictResults)
 
 
+
 @app.route('/<pagename>') 
 def regularpage(pagename=None): 
     """ 
@@ -151,6 +160,8 @@ def regularpage(pagename=None):
     #if pagename==None: 
     #    raise Exception, 'page_not_found' 
     #return render_template(pagename) 
+
+
 
 if __name__ == '__main__':
     print "Starting debugging server."
