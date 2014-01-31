@@ -1,7 +1,7 @@
 function draw_wordcloud(width, height) {
       var fill = d3.scale.category20();
       d3.layout.cloud().size([width, height])
-	  .words(["Alibaba", "Syria", "Obamacare", "gun control", "Facebook IPO", "Obama", "bitcoin", "government shutdown", "twitter", "data science", "apple China", "football concussions", "global warming", "smartphone", "climate conference", "financial crisis", "sochi winter"].map(function(d) {
+	  .words(["Alibaba", "Syria", "Obamacare", "gun control", "Facebook IPO", "Obama", "bitcoin", "government shutdown", "twitter", "data science", "apple China", "football concussions", "global warming", "smartphone", "climate conference", "financial crisis", "sochi winter", "snowden"].map(function(d) {
       return {text: d, size: 10 + Math.random() * 90};
       }))
       .padding(5)
@@ -27,6 +27,11 @@ function draw_wordcloud(width, height) {
         .attr("transform", function(d) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })
-        .text(function(d) { return d.text; });
+        .text(function(d) { return d.text; })
+	.on("click", function(d) 
+	    { 
+		window.open('/search?q='+d.text, '_self'); 
+	    }); 
+
   }
 }
