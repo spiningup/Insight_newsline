@@ -7,7 +7,7 @@ function visualize() {
     var url = "/analyze";
     var Q = $("#query").val();
 
-    var html = '<img src="static/img/ajaxSpinner.gif" alt="Please wait" width=30px height=30px>';
+    var html = '<h2 class="caption" style="font-size:1.2em;">Fetching 1000+ news articles. It can take a few minutes. Please wait ...</h2><img src="static/img/ajaxSpinner.gif" alt="Please wait"  width=30px height=30px>';
     $("#spinner").html(html);    
     $( "#google-table" ).empty();
     $.post(url, {'jobQuery':Q}, cback); 
