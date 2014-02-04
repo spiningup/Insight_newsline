@@ -89,7 +89,7 @@ def runAnalyze():
             dictResults['items'].append({
                                      'title': displaytitles[idx], 'readmoreurl': urls[idx], 'photourl': imgurls[idx],
                                     'date': years[idx].strftime("%m/%d/%y"), 
-                                    'displaydate': years[idx].strftime("%m/%d/%y"), 
+                                    'displaydate': years[idx].strftime("%m/%d"), 
                                     'caption': None,
                                     'body': None,
                                     })
@@ -161,10 +161,6 @@ def regularpage(pagename=None):
     Route not found by the other routes above. May point to a static template. 
     """ 
     return "You've arrived at " + pagename
-    #if pagename==None: 
-    #    raise Exception, 'page_not_found' 
-    #return render_template(pagename) 
-
 
 
 if __name__ == '__main__':
