@@ -1,2 +1,2 @@
-Insight_newsline : Automated timeline for news events.
+Automated timeline for news events.
 ================
